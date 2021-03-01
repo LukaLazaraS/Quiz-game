@@ -11,7 +11,7 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-flow: column;
-    color: white;
+    color: black;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -24,6 +24,7 @@ main {
     width: 70vh;
     height: 60vh;
     border: 3px solid #00b894;
+    border-radius: 3px;
     background-color: #00cec9;
     display: flex;
     justify-content: space-between;
@@ -69,18 +70,19 @@ footer {
 
 .answer {
     height: 50px;
-    width: 110px;
+    min-width: 110px;
     border: 2px solid #00b894;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    user-select: none ;
+    user-select: none;
+    border-radius: 2px;
 }
 
 .answer:hover {
-    background-color: opac;
-    opacity: 0.3;
+    color: white;
+    opacity: 0.5;
     border: 2px solid #000000;
     transition: 300ms;
 }
@@ -121,4 +123,14 @@ footer {
     color: black;
     cursor: pointer;
     transition: 700ms;
+}
+
+.correct-answer-color-green {
+    background-color: green;
+    border-color: green;
+}
+
+.correct-answer-color-red {
+    background-color: red;
+    border-color: red;
 }
