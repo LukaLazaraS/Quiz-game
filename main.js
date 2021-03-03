@@ -3,15 +3,21 @@ const body = document.querySelector('body');
 const header = document.querySelector('header');
 const main = document.querySelector('main');
 const questionDiv = document.querySelector('.question');
+const nextDiv = document.querySelector('.fa-forward');
 const answersDiv = document.querySelector('.answers');
 const answerDiv = document.querySelectorAll('.answer');
+const correctDiv = document.querySelector('.correct');
+const incorrectDiv = document.querySelector('.incorrect');
+const indexDiv = document.querySelector('.count');
 
-var i = 0;     
+var i = 0;
+var scoreCorrect = 0;
+var scoreIncorrect = 0;
 var correctAnswer;
 var questions = [{
 "question": "What's the Highest mountain on Earth?",
     "answer1": "Everest",
-    "answer2": "Kangchenjunga",
+    "answer2": "K2",
     "answer3": "Annapurna",
     "answer4": "Manaslu",
     "correctans": "Everest"
@@ -94,7 +100,6 @@ function startQuiz(){
     answerDiv[3].innerHTML = questions[i].answer4;
     answersDiv.addEventListener('click', checkAnswer);
 
-
 }
 
 function checkAnswer(e){
@@ -103,17 +108,59 @@ function checkAnswer(e){
 
     // console.log(item.innerHTML);
     // console.log(questions[i].correctans);
-    if(item.classList[0] == "answer" && item.innerHTML == questions[i].correctans){
+    if(item.classList[0] == "answer" && item.innerHTML == questions[i].correctans && nextDiv.style.display != "block"){
         correctAnswer = item.innerHTML;
         item.classList.add("correct-answer-color-green");
-        console.log(item.innerHTML);
-    }else if(item.classList[0] == "answer"){
+        if(nextDiv.classList[2]){
+            nextDiv.classList.remove(nextDiv.classList[2]);
+        }
+        nextDiv.classList.add("correct-next-color");
+        correctDiv.innerText =  `${++scoreCorrect} correct`;
+    }else if(item.classList[0] == "answer" && nextDiv.style.display != "block"){
         item.classList.add("correct-answer-color-red");
         answerDiv.forEach(answer => {
             if(answer.classList[0] == "answer" && answer.innerHTML == questions[i].correctans){
                 answer.classList.add("correct-answer-color-green");
+                if(nextDiv.classList[2]){
+                    nextDiv.classList.remove(nextDiv.classList[2]);
+                }
+                nextDiv.classList.add("incorrect-next-color");
+                incorrectDiv.innerText =  `${++scoreIncorrect} correct`;
             }
         })
+    }
+
+    //if click on answer show next button
+    if(item.classList[0] == "answer"){
+        nextDiv.style.display = "block";
+    }
+
+    //if click on next
+    if(e.target == nextDiv){
+        newQuestion();
+    }
+
+    //if click on reset
+    if(e.target.classList[1] == "fa-undo"){
+        location.reload();
+    }
+}
+
+function newQuestion(){
+    if(i == 9){
+        questionDiv.innerHTML = `YOU FINISHED! </br> Your Score: <span style="color: green;">${scoreCorrect}</span> correct answers and <span style="color: green;">${scoreIncorrect}</span> incorrect answers.`;
+    }else{
+        i++;
+        let cou = i;
+        indexDiv.innerHTML = `${++cou}/10`
+        answerDiv.forEach(answer => {
+            if(answer.classList[1]){
+                answer.classList.remove(answer.classList[1]);
+            }
+        })
+        nextDiv.style.display = "none";
+        startQuiz();
+        randColors();
     }
 }
 

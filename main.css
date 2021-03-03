@@ -82,7 +82,7 @@ footer {
 
 .answer:hover {
     color: white;
-    opacity: 0.5;
+    /* opacity: 0.5; */
     border: 2px solid #000000;
     transition: 300ms;
 }
@@ -113,16 +113,16 @@ footer {
 
 .fa-forward {
     position: relative;
-    top: 3rem;
+    /* top: 3rem; */
     font-size: 2rem;
-    color: green;
     display: none;
+    cursor: pointer;
 }
 
 .fa-undo:hover {
-    color: black;
+    transform: rotate(360deg);
     cursor: pointer;
-    transition: 700ms;
+    transition: 500ms;
 }
 
 .correct-answer-color-green {
@@ -133,4 +133,12 @@ footer {
 .correct-answer-color-red {
     background-color: red;
     border-color: red;
+}
+
+.correct-next-color {
+    color: green;
+}
+
+.incorrect-next-color {
+    color: red;
 }
